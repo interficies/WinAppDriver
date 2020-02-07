@@ -33,17 +33,17 @@ namespace NotepadTest
         [TestMethod]
         public void PopupDialogSaveFile()
         {
-            session.FindElementByName("File").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Save As\")]").Click();
+            session.FindElementByName("Archivo").Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Guardar como...\")]").Click();
             Thread.Sleep(TimeSpan.FromSeconds(1)); // Wait for 1 second until the save dialog appears
             session.FindElementByAccessibilityId("FileNameControlHost").SendKeys(SanitizeBackslashes(TargetSaveLocation + TestFileName));
-            session.FindElementByName("Save").Click();
+            session.FindElementByName("Guardar").Click();
 
             // Check if the Save As dialog appears when there's a leftover test file from previous test run
             try
             {
                 Thread.Sleep(TimeSpan.FromSeconds(1)); // Wait for 1 second in case save as dialog appears
-                session.FindElementByName("Confirm Save As").FindElementByName("Yes").Click();
+                session.FindElementByName("Confirmar Guardar como").FindElementByName("Sí").Click();
             }
             catch { }
 
@@ -72,6 +72,7 @@ namespace NotepadTest
             // Navigate Windows Explorer to the target save location folder
             windowsExplorerSession.Keyboard.SendKeys(Keys.Alt + "d" + Keys.Alt + SanitizeBackslashes(TargetSaveLocation) + Keys.Enter);
 
+            // @TODO: Recibe una pulsación cada vez en lugar de recibir toda la palabra
             // Verify that the file is indeed saved in the working directory and delete it
             windowsExplorerSession.FindElementByAccessibilityId("SearchEditBox").SendKeys(TestFileName + Keys.Enter);
             Thread.Sleep(TimeSpan.FromSeconds(2));

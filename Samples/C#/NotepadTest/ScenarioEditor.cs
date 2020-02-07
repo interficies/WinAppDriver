@@ -27,6 +27,7 @@ namespace NotepadTest
         [TestMethod]
         public void EditorEnterText()
         {
+            // Este en Castellano no funciona, 
             // Type mixed text and apply shift modifier to 7890_ to generate corresponding symbols
             Thread.Sleep(TimeSpan.FromSeconds(2));
             editBox.SendKeys("abcdeABCDE 12345" + Keys.Shift + "7890-" + Keys.Shift + @"!@#$%");
@@ -38,7 +39,7 @@ namespace NotepadTest
         {
             // Type a known text sequence, select, copy, and paste it three times
             editBox.SendKeys("789");
-            editBox.SendKeys(Keys.Control + "a" + Keys.Control); // Select all using Ctrl + A keyboard shortcut
+            editBox.SendKeys(Keys.Control + "e" + Keys.Control); // Select all using Ctrl + E keyboard shortcut
             editBox.SendKeys(Keys.Control + "c" + Keys.Control); // Copy using Ctrl + C keyboard shortcut
             editBox.SendKeys(Keys.Control + "vvv" + Keys.Control); // Paste 3 times using Ctrl + V keyboard shortcut
             Assert.AreEqual("789789789", editBox.Text);

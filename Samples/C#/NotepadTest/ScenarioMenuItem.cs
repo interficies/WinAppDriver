@@ -15,6 +15,7 @@
 //******************************************************************************
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium.Appium.Windows;
 
 namespace NotepadTest
 {
@@ -22,24 +23,25 @@ namespace NotepadTest
     public class ScenarioMenuItem : NotepadSession
     {
         [TestMethod]
-        public void MenuItemEdit()
+        public void MenuItemEditar()
         {
             // Select Edit -> Time/Date to get Time/Date from Notepad
             Assert.AreEqual(string.Empty, editBox.Text);
-            session.FindElementByName("Edit").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Time/Date\")]").Click();
+            WindowsElement editButton = session.FindElementByName("Edición");
+            editButton.Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Hora y fecha\")]").Click();
             string timeDateString = editBox.Text;
             Assert.AreNotEqual(string.Empty, timeDateString);
 
             // Select all text, copy, and paste it twice using MenuItem Edit -> Select All, Copy, and Paste
-            session.FindElementByName("Edit").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Select All\")]").Click();
-            session.FindElementByName("Edit").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Copy\")]").Click();
-            session.FindElementByName("Edit").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Paste\")]").Click();
-            session.FindElementByName("Edit").Click();
-            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Paste\")]").Click();
+            editButton.Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Seleccionar todo\")]").Click();
+            editButton.Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Copiar\")]").Click();
+            editButton.Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Pegar\")]").Click();
+            editButton.Click();
+            session.FindElementByXPath($"//MenuItem[starts-with(@Name, \"Pegar\")]").Click();
 
             // Verify that the Time/Date string is duplicated
             Assert.AreEqual(timeDateString + timeDateString, editBox.Text);

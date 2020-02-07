@@ -43,7 +43,7 @@ namespace NotepadTest
                 Assert.IsNotNull(session.SessionId);
 
                 // Verify that Notepad is started with untitled new file
-                Assert.AreEqual("Untitled - Notepad", session.Title);
+                Assert.AreEqual("Sin título: Bloc de notas", session.Title);
 
                 // Set implicit timeout to 1.5 seconds to make element search to retry every 500 ms for at most three times
                 session.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1.5);
@@ -64,7 +64,7 @@ namespace NotepadTest
                 try
                 {
                     // Dismiss Save dialog if it is blocking the exit
-                    session.FindElementByName("Don't Save").Click();
+                    session.FindElementByName("No guardar").Click();
                 }
                 catch { }
 
@@ -77,7 +77,7 @@ namespace NotepadTest
         public void TestInitialize()
         {
             // Select all text and delete to clear the edit box
-            editBox.SendKeys(Keys.Control + "a" + Keys.Control);
+            editBox.SendKeys(Keys.Control + "e" + Keys.Control);
             editBox.SendKeys(Keys.Delete);
             Assert.AreEqual(string.Empty, editBox.Text);
         }
